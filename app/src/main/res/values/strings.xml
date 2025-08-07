@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Main Habit</string>
+
+    <string name="welcoming_msg">Explore the app, Find some peace of mind to achieve good habits.</string>
+    <string name="track_your_goal_heading">Track Your Goals</string>
+    <string name="track_your_goal_text">Don\'t worry if you have trouble determining your goals, We can help you determine your goals and track your goals</string>
+    <string name="get_burn_heading">Get Burn</string>
+    <string name="get_burn_text">Let’s keep burning, to achieve yours goals, it hurts only temporarily, if you give up now you will be in pain forever</string>
+    <string name="eat_well_heading">Eat Well</string>
+    <string name="eat_well_text">Let\'s start a healthy lifestyle with us, we can determine your diet every day. healthy eating is fun</string>
+    <string name="morning_yoga_heading">Morning Yoga</string>
+    <string name="morning_yoga_text">Let\'s start a healthy lifestyle with us, we can determine your diet every day. healthy eating is fun</string>
 </resources>

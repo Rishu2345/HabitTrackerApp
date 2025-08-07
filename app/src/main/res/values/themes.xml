@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MainHabit" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MainHabit" parent="android:Theme.Material.Light.NoActionBar" >
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+
+    <!-- transparent windowBackground so splash doesn’t “linger” -->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <style name="Theme.AppStarting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/teal_200</item>
+        <item name="postSplashScreenTheme">@style/Theme.MainHabit</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
+        <item name="android:windowSplashScreenAnimationDuration">2000</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/teal_700</item>
+    </style>
 </resources>
+
+
+

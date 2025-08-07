@@ -1,16 +1,18 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinCompose)
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.example.mainhabit"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.mainhabit"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 26
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -47,6 +49,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    configurations.all {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+
 }
 
 dependencies {
@@ -66,4 +72,33 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+
+
+    //flow layout
+    implementation(libs.accompanist.flowlayout)
+
+    //datetime Picker
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
+
+    // The compose calendar library for Android
+    implementation("com.kizitonwose.calendar:compose:2.8.0")
+
+    // Room Database
+    implementation ("androidx.room:room-runtime:2.7.2")
+    kapt("androidx.room:room-compiler:2.7.2")
+    implementation("androidx.room:room-ktx:2.7.2")
+
+    // Compose Navigation core
+    implementation("androidx.navigation:navigation-compose:2.9.2")
+
+    //Coil to load image from uri
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    //to Apply Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+
+
 }
