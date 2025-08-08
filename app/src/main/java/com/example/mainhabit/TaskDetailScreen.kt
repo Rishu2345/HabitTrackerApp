@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
@@ -36,10 +35,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
@@ -47,7 +44,6 @@ import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
@@ -90,8 +86,6 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.WeekFields
 import java.util.Locale
-import kotlin.collections.component1
-import kotlin.collections.component2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -173,16 +167,8 @@ fun TaskDetailScreen(viewModel: MainViewModel,navController: NavHostController,t
 
 
     val dateList by taskDao.dateOfCompletion(taskWithDetail.task.taskId).collectAsState(initial = emptyList())
-    val unlockedAchievements by remember{
-        mutableStateOf(
-            viewModel.achievementLevel(taskWithDetail.task.maxStreak)?.let {
-                (0..it).toList()
-            } ?: emptyList()
-        )
-    }
+    val unlockedAchievements = viewModel.achievementLevel(taskWithDetail.task.maxStreak)?.let { (0 .. it).toList() } ?: emptyList()
 
-    //fetching notification
-    Log.d("TaskDetailScreen",taskWithDetail.notifications.toString())
     //Image Picker
     val pickImage = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
@@ -348,6 +334,7 @@ fun TaskDetailScreen(viewModel: MainViewModel,navController: NavHostController,t
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                val unlocked = remember{unlockedAchievements.map{achievementList[it]}}
                 // Take Photo
                 FlowRow(
                     modifier = Modifier
@@ -357,11 +344,11 @@ fun TaskDetailScreen(viewModel: MainViewModel,navController: NavHostController,t
                     maxLines = 2
                 ) {
                     achievementList.forEach { image ->
-                        val unlocked = remember{unlockedAchievements.map{achievementList[it]}}
                         Box(modifier = Modifier.
                             size(90.dp)
                         )
                         {
+                            Log.d("Images","contains is ${unlocked.contains(image)}")
                             Image(painter = painterResource(image),
                                 contentDescription = null,
                                 modifier = Modifier
